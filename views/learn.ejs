@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/13ecf0dbf7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/style.css" type="text/css" />
+    <link rel="icon" href="/logo/logo.png">
+    <title>Trading Corner</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/">Trading Corner</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link btn btn-dark" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-dark navfont">Features</button>
+                        <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item navfont" href="/learn">New to Trading</a>
+                            <a class="dropdown-item navfont" href="/market">Market</a>
+                            <a class="dropdown-item navfont" href="/prediction">Stock Prediction</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link btn btn-dark" href="#contact">Contact Us</a>
+                </li>
+                <% if(login){%>
+                    <li class="nav-item active center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-dark">Welcome <%=name.name%></button>
+                            <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    <% }else{ %>
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-dark" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-dark" href="/signup">Sign up</a>
+                        </li>
+                        <% } %>
+            </ul>
+        </div>
+    </nav>
+    <!-- START THE FEATURETTES -->
+
+
+    <div class="container container-fluid featurette-container" wfd-id="0">
+        <h1 class="text-center title"> 4 Steps to Start Trading</h1>
+        <hr class="featurette-divider">
+        <div class="row featurette featurette-item" wfd-id="9">
+            <div class="col-md-7" wfd-id="11">
+                <h2 class="featurette-heading">1. Open a Trading Account <span class="text-muted" wfd-id="12"></span>
+                </h2>
+                <p class="lead"">Sorry if it seems we're stating the obvious, but you never know! (Remember the
+                    person who did everything to set up his new computer—except to plug it in?) Find a good online
+                    stock broker and open a stock brokerage account. Even if you already have a personal account,
+                    it's not a bad idea to keep a professional trading account separate. Become familiar with the
+                    account interface and take advantage of the free trading tools and research offered exclusively
+                    to clients
+                    <h6>Top Trading Platform</h6>
+                    <ol>
+                        <li>Zerodha Kite</li>
+                        <li>Upstox Pro</li>
+                        <li>Angel Speed Pro</li>
+                    </ol>
+                </p>
+            </div>
+            <div class=" col-md-5" wfd-id="10">
+                    <img src="/img/featurette1.png" alt="Featurette Image Loading error"
+                        class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+                        height="400">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette featurette-item" wfd-id="5">
+            <div class="col-md-7 order-md-2" wfd-id="7">
+                <h2 class="featurette-heading">2. Learn to Read<span class="text-muted" wfd-id="8">.</span></h2>
+                <p class="lead">Financial articles, stock market books, website tutorials, etc. There's a wealth of
+                    information out there and much of it inexpensive to tap. It's important not to focus too narrowly on
+                    one single aspect of the trading game. Instead, study everything market-wise, including ideas and
+                    concepts you don't feel are particularly relevant at this time
+                    <h6>Top Suggestions</h6>
+                <ol>
+                    <li>Investing in India – Rahul Sarogi.</li>
+                    <li>Stock Market Wizards by Jack D. Schwager</li>
+                    <li>Stocks to Riches – Parag Parikh</li>
+                </ol>
+                </p>
+            </div>
+            <div class="col-md-5 order-md-1" wfd-id="6">
+                <img src="/img/featurette2.jpg" alt="Featurette Image Loading error"
+                    class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+                    height="400">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette featurette-item" wfd-id="1">
+            <div class="col-md-7" wfd-id="3">
+                <h2 class="featurette-heading">3. Learn To Analyze<span class="text-muted" wfd-id="4"></span></h2>
+                <p class="lead">Study the basics of technical analysis and look at price charts—thousands of them—in all
+                    time frames. You may think fundamental analysis offers a better path to profits because it tracks
+                    growth curves and revenue streams, but traders live and die by price action that diverges sharply
+                    from underlying fundamentals. Do not stop reading company spreadsheets because they offer a trading
+                    edge over those who ignore them. However, they won’t help you survive your first year as a trader.
+                </p>
+            </div>
+            <div class="col-md-5" wfd-id="2">
+                <img src="/img/featurette4.jpg" alt="Featurette Image Loading error"
+                    class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+                    height="400">
+
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette featurette-item" wfd-id="5">
+            <div class="col-md-7 order-md-2" wfd-id="7">
+                <h2 class="featurette-heading">4. Practice Trading<span class="text-muted" wfd-id="8"></span></h2>
+                <p class="lead">t’s now time to get your feet wet without giving up your trading stake. Paper trading,
+                    or virtual trading, offers a perfect solution, allowing the neophyte to follow real-time market
+                    actions, making buying and selling decisions that form the outline of a theoretical performance
+                    record. It usually involves the use of a stock market simulator that has the look and feel of an
+                    actual stock exchange's performance. Make lots of trades, using different holding periods and
+                    strategies, and then analyze the results for obvious flaws. </p>
+            </div>
+            <div class="col-md-5 order-md-1" wfd-id="6">
+                <img src="/img/featurette3.jpg" alt="Featurette Image Loading error"
+                    class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+                    height="400">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+    </div>
+    <!-- /END THE FEATURETTES -->
+
+    <!-- features -->
+    <div class="container-fluid">
+        <h2 class="text-center">Make Use of our Exclusive Features</h2>
+        <h3 class="text-center">Start Using Them</h3>
+        <div class="row featureslearn" wfd-id="13">
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4 features-itemlearn" wfd-id="15">
+            <i class="fas fa-poll fa-5x feature-icon"></i>
+            <h2>Market</h2>
+            <p>Get the list of all type of market</p>
+            <p><a class="btn btn-secondary" href="/market">View details »</a></p>
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4 features-itemlearn" wfd-id="14">
+            <i class="fas fa-chart-line fa-5x feature-icon"></i>
+    
+            <h2>Stock Prediction</h2>
+            <p>Want to know the future market value</p>
+            <p>
+              <a class="btn btn-secondary" href="/prediction">View details »</a>
+            </p>
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <hr class="featurette-divider">
+    <!-- features -->
+    <div class="null" id="contact"></div>
+    <footer class="footer ftr">
+        <div class="container">
+            <span class="">
+                <div class="container-fluid text-center contact-container ">
+                    <h2 class="contact-title">Contact Us</h2>
+                    <div class="row contact contact-item">
+                        <div class="col-lg-4 col-md-12">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                            <p>Sangli,Maharashtra</p>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12">
+                            <i class="fas fa-phone fa-2x"></i>
+                            <p>+91 9284245945</p>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-12">
+                            <i class="fas fa-envelope fa-2x"></i>
+                            <p>project4dtu@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container-fluid">
+                    <p class="float-right"><a href="#">Back to top</a></p>
+                    <p>&copy;2021 TradingCorner.com</p>
+                </div>
+            </span>
+        </div>
+    </footer>
+</body>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+-->
+
+</html>

@@ -1,0 +1,131 @@
+html {
+    scroll-behavior: smooth;
+    margin:0px
+  }
+nav{
+    padding: 1% 0px;
+}
+.nav-item{
+    margin:0px 10px;
+}
+.carousel-inner > .carousel-item > img {
+    width: 100vw;
+    height:90vh;
+  }
+
+.features{
+    height:auto;
+    margin:14% auto ;
+    text-align: center;
+}
+
+.features-item{
+    margin: 1% auto 0px auto; 
+}
+.featureslearn{
+    height:auto;
+    margin:5% auto ;
+    text-align: center;
+}
+
+.features-itemlearn{
+    margin: 1% auto 0px auto; 
+}
+
+
+.contact-container{
+    margin-top: 80px;
+    height: auto;
+}
+.contact-item{
+    margin: 1% auto; 
+    text-align: center;
+}
+.contact-title{
+    margin-bottom: 30px;
+}
+
+.null{
+    margin: 0px;
+    padding: 0px;
+}
+
+.ftr{
+    height: auto ;
+}
+
+.feature-icon{
+    margin-bottom: 20px;
+}
+
+.signup{
+    margin:6% auto 3% auto;
+}
+.login{
+    margin-top: 10%;
+    margin-bottom:7%;
+}
+
+.center{
+    margin:auto auto;
+}
+
+.title{
+    margin-top: 10%;
+}
+
+.featurette-container{
+margin: 5% auto 5% auto;
+}
+.featurette-item{
+    margin:4% auto 4% auto;
+}
+
+
+/*Media Queries*/
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 428px) 
+{
+    .signup{
+        margin:20% auto 5% auto;
+    }
+    .login{
+        margin-top: 25%;
+        margin-bottom:10%;
+    }
+    
+    .featurette-item{
+    margin: 25% auto 5% auto;
+}
+
+    
+}
+@media only screen 
+  and (min-device-width: 428px) 
+  and (max-device-width: 768px) 
+{
+    .signup{
+        margin:10% auto 4% auto;
+    }
+    .login{
+        margin-top: 15%;
+        margin-bottom:7%;
+    }
+    
+    .featurette-item{
+        margin-top: 25% auto 5% auto;
+    }
+    
+}
+.nav-link{
+    font-size: 20px;
+}
+.navfont{
+    font-size: 20px;
+}
+
+.navbar-brand{
+    font-size: 30px;
+    padding-left: 10px;
+}
