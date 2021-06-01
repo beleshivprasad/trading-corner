@@ -33,7 +33,7 @@ var getMarket = function (req,res) {
 //DEFINING Prediction ROUTE
 var getPrediction = function (req,res) {
     res.render('prediction',{
-        name: req.user
+        name: req.user,prediction:"none"
     })
 }
 
@@ -128,7 +128,18 @@ var postLogin = function (req,res,next) {
     }
 }
 
+var postPrediction = function(req,res){
+    var ticker = req.body.stock;
+    if(ticker=='none'){
+        req.flash("error_msg","Please Select Stock")
+        res.redirect('/prediction')
+    }
+    else{
+        predict=23
+        res.render('prediction',{prediction:predict,name: req.user})
+    }
+}
 
 //EXPORTING THE CONTROLLER FUNCTIONS
 
-module.exports = {getHome,getLearn,getMarket,getPrediction,getSignup,getLogin,postSignup,postLogin,getLogout}
+module.exports = {getHome,getLearn,getMarket,getPrediction,getSignup,getLogin,postSignup,postLogin,getLogout,postPrediction}

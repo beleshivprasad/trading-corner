@@ -37,6 +37,7 @@ router.get('/logout',controller.getLogout)
 //LOGIN ROUTE
 router.post('/signup',controller.postSignup)
 router.post('/login',controller.postLogin)
+router.post('/prediction',controller.postPrediction)
 
 
 

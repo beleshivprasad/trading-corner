@@ -48,19 +48,52 @@
         </li>
         <li class="nav-item active center">
           <div class="btn-group">
-            <button type="button" class="btn btn-dark">Welcome <%=name.name%></button>
+            <button type="button" class="btn btn-dark navfont">Welcome <%=name.name%></button>
             <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/logout">Logout</a>
+              <a class="dropdown-item navfont" href="/logout">Logout</a>
             </div>
           </div>
         </li>
       </ul>
     </div>
   </nav>
+
+
+  <h1 class="text-center sm">Stock Market Prediction</h1>
+  <div class="container-fluid prediction card ">
+    <% if(error_msg != ''){%> 
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong><%= error_msg %></strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  <% } %>
+    <form method="POST" action="/prediction">
+      <div class="form-group ">
+        <label for="inputState">Stock Name</label>
+        <select id="inputState" class="form-control" name="stock">
+          <option selected value="none">Choose</option>
+          <option value="AMZN">AMAZON</option>
+          <option value="AAPL">APPLE</option>
+          <option value="FB">FACEBOOK</option>
+          <option value="TSLA">TESLA</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-dark btn-block">Predict</button>
+    </form>
+    <div class="container">
+      <%if(prediction=="none"){%>
+        <h2 style="color: red; text-align: center;" class="result">This is website is under progress</h2>
+      <%}else{%>
+        <h2 style="color: green; text-align: center;"><%=prediction%></h2>
+       <%}%>
+    </div>
+  </div>
 
   <div class="null" id="contact"></div>
   <footer class="footer ftr">

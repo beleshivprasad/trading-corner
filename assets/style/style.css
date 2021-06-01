@@ -81,6 +81,54 @@ margin: 5% auto 5% auto;
     margin:4% auto 4% auto;
 }
 
+.nav-link{
+    font-size: 20px;
+}
+.navfont{
+    font-size: 20px;
+}
+
+.navbar-brand{
+    font-size: 30px;
+    padding-left: 10px;
+}
+.market{
+    height: 50vh;
+}
+.prediction{
+    height: 50vh;
+    width: 50%;
+    margin:auto auto;
+}
+
+.result{
+    margin-top: 5%;
+}
+.sm{
+    margin-top: 7%;
+}
+
+@media only screen 
+  and (min-device-width: 428px) 
+  and (max-device-width: 768px) 
+{
+    .signup{
+        margin:10% auto 4% auto;
+    }
+    .login{
+        margin-top: 15%;
+        margin-bottom:7%;
+    }
+    
+    .featurette-item{
+        margin-top: 25% auto 5% auto;
+    }
+    .sm{
+        margin-top: 25%;
+    }
+    
+}
+
 
 /*Media Queries*/
 @media only screen 
@@ -97,35 +145,8 @@ margin: 5% auto 5% auto;
     
     .featurette-item{
     margin: 25% auto 5% auto;
-}
-
-    
-}
-@media only screen 
-  and (min-device-width: 428px) 
-  and (max-device-width: 768px) 
-{
-    .signup{
-        margin:10% auto 4% auto;
     }
-    .login{
-        margin-top: 15%;
-        margin-bottom:7%;
+    .sm{
+        margin-top: 20%;
     }
-    
-    .featurette-item{
-        margin-top: 25% auto 5% auto;
-    }
-    
-}
-.nav-link{
-    font-size: 20px;
-}
-.navfont{
-    font-size: 20px;
-}
-
-.navbar-brand{
-    font-size: 30px;
-    padding-left: 10px;
 }
