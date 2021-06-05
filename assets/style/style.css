@@ -94,6 +94,7 @@ margin: 5% auto 5% auto;
 }
 .market{
     height: 50vh;
+    width:90%
 }
 .prediction{
     height: 50vh;
@@ -102,7 +103,7 @@ margin: 5% auto 5% auto;
 }
 
 .result{
-    margin-top: 5%;
+    margin-top: 16%;
 }
 .sm{
     margin-top: 7%;

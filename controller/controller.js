@@ -2,57 +2,116 @@ const mongoose = require('mongoose')
 const User = require('../model/User')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const dotenv = require('dotenv')
+const request = require('request')
+const cheerio = require('cheerio')
+dotenv.config({
+    path: './config.env'
+})
+const unirest = require("unirest");
+const API_KEY = process.env.API_KEY;
+
+
 
 require('../auth/passport')(passport)
 require('../auth/auth')
 
 //DEFINING Home ROUTE
-var getHome = function (req,res) {
-    res.render('index',{
-        name:req.user
-    })
-}
-
-
-//DEFINING HOME ROUTE
-var getLearn = function (req,res) {
-    res.render('learn',{
+var getHome = function (req, res) {
+    res.render('index', {
         name: req.user
     })
 }
 
 
 //DEFINING HOME ROUTE
-var getMarket = function (req,res) {
-    res.render('market',{
+var getLearn = function (req, res) {
+    res.render('learn', {
         name: req.user
     })
+}
+
+
+//DEFINING HOME ROUTE
+var getMarket = function (req, res) {
+    var td;
+    var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN']
+    var data = []
+    var obj = {}
+
+    function getdate() {
+        td = new Date();
+        var d = String(td.getDate()).padStart(2, '0');
+        var m = String(td.getMonth() + 1).padStart(2, '0');
+        var y = td.getFullYear();
+        d = y + "-" + m + "-" + d;
+        return d;
+    }
+    NSE.forEach((item, index) => {
+        (async ()=>{
+            await request({
+                url: `https://www.google.com/finance/quote/${item}:NSE`,
+                headers: {
+                    "accept": " */*",
+                    "accept-encoding": "json",
+                    "accept-language": "en-US"
+                },
+                json: true
+            },
+            function (error, response, body) {
+                if (error) {
+                    // console.log(err)
+                }
+                if (body) {
+                    var $ = cheerio.load(body)
+                    let stock = $('div.fxKbKc').text()
+                    let title = $('#yDmH0d > c-wiz.zQTmif.SSPGKf.u5wqUe > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > h1').text()
+                    obj['symbol'] = item;
+                    obj['title'] = title;
+                    obj['price'] = stock;
+                    // console.log(obj)
+                    data.push(obj)
+                    obj = {}
+                    // console.log(obj)
+                }
+            });
+        })();
+    });
+    setTimeout(() => {  
+    console.log(data)
+    res.render('market', {
+        name: req.user,
+        data: data
+    })
+    }, 4000);
 }
 
 
 //DEFINING Prediction ROUTE
-var getPrediction = function (req,res) {
-    res.render('prediction',{
-        name: req.user,prediction:"none"
+var getPrediction = function (req, res) {
+
+    res.render('prediction', {
+        name: req.user,
+        prediction: 'default'
     })
 }
 
 
 //DEFINING LOGIN ROUTE
-var getLogin = function (req,res) {
+var getLogin = function (req, res) {
     res.render('login')
 }
 
 
 //DEFINING SIGNUP ROUTE
-var getSignup = function (req,res) {
+var getSignup = function (req, res) {
     res.render('signup')
 }
 
 //DEFINING LOGOUT ROUTE
-var getLogout = function(req,res){
+var getLogout = function (req, res) {
     req.logout()
-    req.flash('success_msg','Logged out Successfully')
+    req.flash('success_msg', 'Logged out Successfully')
     res.redirect('/login')
 }
 
@@ -60,49 +119,69 @@ var getLogout = function(req,res){
 //DEFINING THE POSTS ROUTE
 
 //DEFINING LOGIN ROUTE
-var postSignup = function (req,res) {
-    const {name,email,pswd,cnfpswd} = req.body;
+var postSignup = function (req, res) {
+    const {
+        name,
+        email,
+        pswd,
+        cnfpswd
+    } = req.body;
     let error = [];
-    if(!name || !email || !pswd || !cnfpswd){
-        error.push({msg:"All field Required"});
+    if (!name || !email || !pswd || !cnfpswd) {
+        error.push({
+            msg: "All field Required"
+        });
     }
-    if(pswd !== cnfpswd){
-        error.push({msg:"Password Dont Match"});
+    if (pswd !== cnfpswd) {
+        error.push({
+            msg: "Password Dont Match"
+        });
     }
-    if(pswd.length < 6){
-        error.push({msg:"Password Should be at least  6 character"});
+    if (pswd.length < 6) {
+        error.push({
+            msg: "Password Should be at least  6 character"
+        });
     }
-    if(error.length > 0){
-        res.render('signup',{
-            error,name,email,pswd,cnfpswd
+    if (error.length > 0) {
+        res.render('signup', {
+            error,
+            name,
+            email,
+            pswd,
+            cnfpswd
         })
-    }
-    else{
-        User.findOne({email:email})
-            .then(user =>{
-                if(user){
-                    error.push({msg:"User Already Existed"})
-                    res.render('signup',{
-                        name,email,pswd,cnfpswd
+    } else {
+        User.findOne({
+                email: email
+            })
+            .then(user => {
+                if (user) {
+                    error.push({
+                        msg: "User Already Existed"
                     })
-                }
-                else{
+                    res.render('signup', {
+                        name,
+                        email,
+                        pswd,
+                        cnfpswd
+                    })
+                } else {
                     const newUser = new User({
                         name,
                         email,
                         pswd
                     })
 
-                    bcrypt.genSalt(10,(err,salt)=>{
-                        bcrypt.hash(newUser.pswd,salt,(err,hash)=>{
-                            if(err) throw err;
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(newUser.pswd, salt, (err, hash) => {
+                            if (err) throw err;
                             newUser.pswd = hash;
                             newUser.save()
-                                .then(user=>{
-                                    req.flash('success_msg','User Registered Successfully')
+                                .then(user => {
+                                    req.flash('success_msg', 'User Registered Successfully')
                                     res.redirect('/login')
                                 })
-                                .catch(err=>{
+                                .catch(err => {
                                     console.log(err)
                                 })
                         })
@@ -113,33 +192,49 @@ var postSignup = function (req,res) {
 }
 
 //DEFINING LOGIN ROUTE
-var postLogin = function (req,res,next) {
-    const {email,pswd} = req.body;
-    if(!email || !pswd ){
-        req.flash('error_msg','All Field Required')
+var postLogin = function (req, res, next) {
+    const {
+        email,
+        pswd
+    } = req.body;
+    if (!email || !pswd) {
+        req.flash('error_msg', 'All Field Required')
         res.redirect('/login')
-    }
-    else{
-        passport.authenticate('local',{
+    } else {
+        passport.authenticate('local', {
             successRedirect: '/',
             failureRedirect: '/login',
             failureFlash: true,
-        })(req,res,next);
+        })(req, res, next);
     }
 }
 
-var postPrediction = function(req,res){
+var postPrediction = function (req, res) {
     var ticker = req.body.stock;
-    if(ticker=='none'){
-        req.flash("error_msg","Please Select Stock")
+    console.log(ticker)
+    if (ticker == 'none') {
+        req.flash("error_msg", "Please Select Stock")
         res.redirect('/prediction')
-    }
-    else{
-        predict=23
-        res.render('prediction',{prediction:predict,name: req.user})
+    } else {
+        predict = "Under Development"
+        res.render('prediction', {
+            prediction: predict,
+            name: req.user
+        })
     }
 }
 
 //EXPORTING THE CONTROLLER FUNCTIONS
 
-module.exports = {getHome,getLearn,getMarket,getPrediction,getSignup,getLogin,postSignup,postLogin,getLogout,postPrediction}
+module.exports = {
+    getHome,
+    getLearn,
+    getMarket,
+    getPrediction,
+    getSignup,
+    getLogin,
+    postSignup,
+    postLogin,
+    getLogout,
+    postPrediction
+}

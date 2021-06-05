@@ -78,20 +78,23 @@
         <label for="inputState">Stock Name</label>
         <select id="inputState" class="form-control" name="stock">
           <option selected value="none">Choose</option>
-          <option value="AMZN">AMAZON</option>
-          <option value="AAPL">APPLE</option>
-          <option value="FB">FACEBOOK</option>
-          <option value="TSLA">TESLA</option>
+          <option value="ICICIBANK">	ICICI Bank Ltd</option>
+          <option value="HDFC">Housing Development Finance Corp Ltd</option>
+          <option value="HINDUNILVR">Hindustan Unilever Ltd</option>
+          <option value="RELIANCE">	Reliance Industries Limited</option>
+          <option value="INFY">	Infosys Ltd</option>
+          <option value="TCS">	Tata Consultancy Services Limited</option>
+          <option value="SBIN">	State Bank of India</option>
         </select>
       </div>
       <button type="submit" class="btn btn-dark btn-block">Predict</button>
     </form>
     <div class="container">
-      <%if(prediction=="none"){%>
-        <h2 style="color: red; text-align: center;" class="result">This is website is under progress</h2>
+      <%if(prediction=="default"){%>
+        <h2 style="color: green; text-align: center;" class="result"></h2>
       <%}else{%>
-        <h2 style="color: green; text-align: center;"><%=prediction%></h2>
-       <%}%>
+          <h2 style="color: red; text-align: center;" class="result">Under Development!</h2>
+        <% } %> 
     </div>
   </div>
 
