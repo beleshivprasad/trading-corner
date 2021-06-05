@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/13ecf0dbf7.js" crossorigin="anonymous"></script>
+    <script src="/js/jquery.js"></script>
     <link rel="stylesheet" href="/style/style.css" type="text/css" />
     <link rel="icon" href="/logo/logo.png" />
 
     <title>Trading Corner</title>
+    <script>
+    </script>
 </head>
 
 <body>
@@ -87,7 +90,7 @@
                     <tr>
                         <th scope="row"><%=index+1%></th>
                         <td><%=item.symbol%></td>
-                        <td><%=item.title%></td>
+                        <td><%=item.stock%></td>
                         <td><%=item.price%></td>
                     </tr>
                     <% }) %>

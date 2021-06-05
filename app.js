@@ -33,6 +33,8 @@ mongoose.connect(URL,{
     .then(()=>console.log(`MongoDB connected`))
     .catch((err)=>console.log(`Error Connecting Database: ${err}`))
 
+mongoose.set('useFindAndModify',false);
+
 //SETTING UP THE MIDDLEWARE FOR STATIC FILES
 app.use(express.static(path.resolve(__dirname,'./assets/')))
 app.use(express.static(__dirname+'assets'))

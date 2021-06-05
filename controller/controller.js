@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../model/User')
+const Stock =require('../model/Stock')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const dotenv = require('dotenv')
@@ -34,22 +35,9 @@ var getLearn = function (req, res) {
 
 //DEFINING HOME ROUTE
 var getMarket = function (req, res) {
-    var td;
-    var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN']
-    var data = []
-    var obj = {}
-
-    function getdate() {
-        td = new Date();
-        var d = String(td.getDate()).padStart(2, '0');
-        var m = String(td.getMonth() + 1).padStart(2, '0');
-        var y = td.getFullYear();
-        d = y + "-" + m + "-" + d;
-        return d;
-    }
+    var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN'];
     NSE.forEach((item, index) => {
-        (async ()=>{
-            await request({
+            request({
                 url: `https://www.google.com/finance/quote/${item}:NSE`,
                 headers: {
                     "accept": " */*",
@@ -64,26 +52,29 @@ var getMarket = function (req, res) {
                 }
                 if (body) {
                     var $ = cheerio.load(body)
-                    let stock = $('div.fxKbKc').text()
+                    let price = $('div.fxKbKc').text()
                     let title = $('#yDmH0d > c-wiz.zQTmif.SSPGKf.u5wqUe > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > h1').text()
-                    obj['symbol'] = item;
-                    obj['title'] = title;
-                    obj['price'] = stock;
-                    // console.log(obj)
-                    data.push(obj)
-                    obj = {}
-                    // console.log(obj)
+
+                    Stock.findOneAndUpdate({symbol:item},{price:price})
+                        .then(data=>{
+                            // console.log(data.symbol);
+                        })
+                        .catch(err=>console.log(err))
+
                 }
             });
-        })();
     });
-    setTimeout(() => {  
-    console.log(data)
-    res.render('market', {
-        name: req.user,
-        data: data
-    })
-    }, 4000);
+
+    Stock.find({})
+        .then(data=>{
+            // console.log(data[0])
+            res.render('market', {
+                name: req.user,
+                data: data
+            })
+        })
+        .catch(err=>console.log(err))
+
 }
 
 
