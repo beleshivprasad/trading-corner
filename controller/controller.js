@@ -36,7 +36,8 @@ var getLearn = function (req, res) {
 //DEFINING HOME ROUTE
 var getMarket = function (req, res) {
     var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN'];
-    NSE.forEach((item, index) => {
+    setInterval(() => {
+        NSE.forEach((item, index) => {
             request({
                 url: `https://www.google.com/finance/quote/${item}:NSE`,
                 headers: {
@@ -57,13 +58,14 @@ var getMarket = function (req, res) {
 
                     Stock.findOneAndUpdate({symbol:item},{price:price})
                         .then(data=>{
-                            // console.log(data.symbol);
+                            console.log(data.price);
                         })
                         .catch(err=>console.log(err))
 
                 }
             });
     });
+    }, 5000);
 
     Stock.find({})
         .then(data=>{
