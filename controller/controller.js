@@ -17,6 +17,43 @@ const API_KEY = process.env.API_KEY;
 require('../auth/passport')(passport)
 require('../auth/auth')
 
+
+//Stock Data
+var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN'];
+setInterval(() => {
+    NSE.forEach((item, index) => {
+        request({
+            url: `https://www.google.com/finance/quote/${item}:NSE`,
+            headers: {
+                "accept": " */*",
+                "accept-encoding": "json",
+                "accept-language": "en-US"
+            },
+            json: true
+        },
+        function (error, response, body) {
+            if (error) {
+                // console.log(err)
+            }
+            if (body) {
+                var $ = cheerio.load(body)
+                let price = $('div.fxKbKc').text()
+                let title = $('#yDmH0d > c-wiz.zQTmif.SSPGKf.u5wqUe > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > h1').text()
+                // console.log(price)
+                Stock.findOneAndUpdate({symbol:item},{price:price})
+                    .then(data=>{
+                        //console.log(data.price);
+                    })
+                    .catch(err=>console.log(err))
+
+            }
+        });
+});
+}, 15000);
+
+
+
+
 //DEFINING Home ROUTE
 var getHome = function (req, res) {
     res.render('index', {
@@ -35,38 +72,6 @@ var getLearn = function (req, res) {
 
 //DEFINING HOME ROUTE
 var getMarket = function (req, res) {
-    var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN'];
-    setInterval(() => {
-        NSE.forEach((item, index) => {
-            request({
-                url: `https://www.google.com/finance/quote/${item}:NSE`,
-                headers: {
-                    "accept": " */*",
-                    "accept-encoding": "json",
-                    "accept-language": "en-US"
-                },
-                json: true
-            },
-            function (error, response, body) {
-                if (error) {
-                    // console.log(err)
-                }
-                if (body) {
-                    var $ = cheerio.load(body)
-                    let price = $('div.fxKbKc').text()
-                    let title = $('#yDmH0d > c-wiz.zQTmif.SSPGKf.u5wqUe > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > h1').text()
-
-                    Stock.findOneAndUpdate({symbol:item},{price:price})
-                        .then(data=>{
-                            console.log(data.price);
-                        })
-                        .catch(err=>console.log(err))
-
-                }
-            });
-    });
-    }, 5000);
-
     Stock.find({})
         .then(data=>{
             // console.log(data[0])

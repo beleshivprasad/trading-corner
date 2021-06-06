@@ -92,10 +92,7 @@ margin: 5% auto 5% auto;
     font-size: 30px;
     padding-left: 10px;
 }
-.market{
-    height: 50vh;
-    width:90%
-}
+
 .prediction{
     height: 50vh;
     width: 50%;
@@ -127,6 +124,7 @@ margin: 5% auto 5% auto;
     .sm{
         margin-top: 25%;
     }
+
     
 }
 
@@ -150,4 +148,5 @@ margin: 5% auto 5% auto;
     .sm{
         margin-top: 20%;
     }
+
 }
