@@ -59,10 +59,10 @@ nav{
 }
 
 .signup{
-    margin:6% auto 3% auto;
+    margin:7% auto 2% auto;
 }
 .login{
-    margin-top: 10%;
+    margin-top: 15%;
     margin-bottom:7%;
 }
 
@@ -71,7 +71,7 @@ nav{
 }
 
 .title{
-    margin-top: 10%;
+    margin-top: 12%;
 }
 
 .featurette-container{
@@ -111,10 +111,10 @@ margin: 5% auto 5% auto;
   and (max-device-width: 768px) 
 {
     .signup{
-        margin:10% auto 4% auto;
+        margin:15% auto 4% auto;
     }
     .login{
-        margin-top: 15%;
+        margin-top: 25%;
         margin-bottom:7%;
     }
     
@@ -124,7 +124,9 @@ margin: 5% auto 5% auto;
     .sm{
         margin-top: 25%;
     }
-
+    .title{
+        margin-top: 13%;
+    }
     
 }
 
@@ -135,10 +137,10 @@ margin: 5% auto 5% auto;
   and (max-device-width: 428px) 
 {
     .signup{
-        margin:20% auto 5% auto;
+        margin:29% auto 5% auto;
     }
     .login{
-        margin-top: 25%;
+        margin-top: 34%;
         margin-bottom:10%;
     }
     
@@ -146,7 +148,10 @@ margin: 5% auto 5% auto;
     margin: 25% auto 5% auto;
     }
     .sm{
-        margin-top: 20%;
+        margin-top: 25%;
+    }
+    .title{
+        margin-top: 25%;
     }
 
 }
