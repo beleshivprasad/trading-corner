@@ -19,11 +19,11 @@ require('../auth/auth')
 
 
 //Stock Data
-var NSE = ['RELIANCE', 'TCS', 'HDFC', 'INFY', 'HINDUNILVR', 'ICICIBANK', 'SBIN'];
+var NSE = ['RELIANCE:NSE', 'TCS:NSE', 'HDFC:NSE', 'INFY:NSE', 'HINDUNILVR:NSE', 'ICICIBANK:NSE', 'SBIN:NSE','YESBANK:NSE','ITC:NSE','ADANITRANS:NSE','COALINDIA:NSE','BAJFINANCE:NSE','KOTAKBANK:NSE','FB:NASDAQ','AAPL:NASDAQ','WIPRO:NSE','HCLTECH:NSE','ASIANPAINT:NSE','AMZN:NASDAQ','ADANIENT:NSE','MSCI:NYSE','TSLA:NASDAQ','MSFT:NASDAQ','BABA:NYSE','AMJ:NYSEARCA'];
 setInterval(() => {
     NSE.forEach((item, index) => {
         request({
-            url: `https://www.google.com/finance/quote/${item}:NSE`,
+            url: `https://www.google.com/finance/quote/${item}`,
             headers: {
                 "accept": " */*",
                 "accept-encoding": "json",
@@ -37,19 +37,38 @@ setInterval(() => {
             }
             if (body) {
                 var $ = cheerio.load(body)
-                let price = $('div.fxKbKc').text()
+                let price = $('#yDmH0d > c-wiz > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > div > div:nth-child(1) > div > span > div > div').text()
                 let title = $('#yDmH0d > c-wiz.zQTmif.SSPGKf.u5wqUe > div > div.e1AOyf > main > div.VfPpkd-WsjYwc.VfPpkd-WsjYwc-OWXEXe-INsAgc.KC1dQ.Usd1Ac.AaN0Dd.QZMA8b > c-wiz > div > div:nth-child(1) > div > div.rPF6Lc > div:nth-child(1) > h1').text()
                 // console.log(price)
-                Stock.findOneAndUpdate({symbol:item},{price:price})
+                const newStock= new Stock({
+                    symbol:item,
+                    stock:title,
+                    price:price
+                })
+                Stock.findOne({symbol:item})
                     .then(data=>{
-                        //console.log(data.price);
+                        if(data){
+                            Stock.findOneAndUpdate({symbol:item},{price:price})
+                                .then(data=>{
+                                    //console.log(data.price);
+                                })
+                                .catch(err=>console.log(err))
+                        }
+                        else{
+                            newStock.save()
+                                .then(data=>{
+                                    if(data){
+                                        console.log("Saved Successfully")
+                                    }
+                                })
+                                .catch(err=>console.log("something went wrong"))
+                        }
                     })
-                    .catch(err=>console.log(err))
 
             }
         });
 });
-}, 15000);
+}, 600000);
 
 
 
