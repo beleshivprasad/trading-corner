@@ -80,21 +80,40 @@
         <select id="inputState" class="form-control" name="stock">
           <option selected value="none">Choose</option>
           <option value="ICICIBANK.NS">	ICICI Bank Ltd</option>
+          <option value="RELIANCE.NS">	Reliance Industries Limited</option>
           <option value="HDFC.NS">Housing Development Finance Corp Ltd</option>
           <option value="HINDUNILVR.NS">Hindustan Unilever Ltd</option>
-          <option value="RELIANCE.NS">	Reliance Industries Limited</option>
-          <option value="INFY">	Infosys Ltd</option>
           <option value="TCS.NS">	Tata Consultancy Services Limited</option>
+          <option value="INFY.NS">	Infosys Ltd</option>
           <option value="SBIN.NS">	State Bank of India</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-dark btn-block">Predict</button>
+      <button type="submit" class="btn btn-dark btn-block" onclick="document.getElementById('predict').value=''">Predict</button>
     </form>
     <div class="container">
       <%if(prediction=="default"){%>
         <h2 style="color: green; text-align: center;" class="result"></h2>
-      <%}else{%>
-          <h2 style="color: red; text-align: center;" class="result">Under Development!</h2>
+      <%}else if(prediction=='dev'){%>
+        <h2 style="color: red; text-align: center;" class="result" id='predict'>Under Development!</h2>
+        <% }else if(prediction!='default' || prediction!='dev'){ %>
+          <div class="table-responsive" style="margin-top: 7%;">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Stock Name</th>
+                  <th scope="col">Current Price</th>
+                  <th scope="col">Predicted Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%=stock%></td>
+                  <td><%=current%></td>
+                  <td>₹<%=prediction%></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         <% } %> 
     </div>
   </div>

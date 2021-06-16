@@ -219,7 +219,7 @@ var postLogin = function (req, res, next) {
         res.redirect('/login')
     } else {
         passport.authenticate('local', {
-            successRedirect: '/',
+            successRedirect: '/prediction',
             failureRedirect: '/login',
             failureFlash: true,
         })(req, res, next);
@@ -228,16 +228,185 @@ var postLogin = function (req, res, next) {
 
 var postPrediction = function (req, res) {
     var ticker = req.body.stock;
-    console.log(ticker)
+    const{spawn}=require("child_process")
+    
     if (ticker == 'none') {
         req.flash("error_msg", "Please Select Stock")
         res.redirect('/prediction')
     } else {
-        predict = "Under Development"
-        res.render('prediction', {
-            prediction: predict,
-            name: req.user
-        })
+        if(ticker=='ICICIBANK.NS'){
+            let folder='icici'
+            const script=spawn('python',['testing.py',ticker,folder])
+
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'ICICIBANK:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='TCS.NS')
+        {
+            let folder='tcs'
+            const script=spawn('python',['testing.py',ticker,folder])
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'TCS:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='INFY.NS')
+        {
+            let folder='infy'
+            const script=spawn('python',['testing.py',ticker,folder])
+
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'INFY:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='RELIANCE.NS')
+        {
+            let folder='reliance'
+            const script=spawn('python',['testing.py',ticker,folder])
+
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'RELIANCE:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='HDFC.NS')
+        {
+            let folder='hdfc'
+            const script=spawn('python',['testing.py',ticker,folder])
+
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'HDFC:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='HINDUNILVR.NS')
+        {
+            let folder='hindustan'
+            const script=spawn('python',['testing.py',ticker,folder])
+
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'HINDUNILVR:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else if(ticker=='SBIN.NS')
+        {
+            let folder='sbi'
+            const script=spawn('python',['testing.py',ticker,folder])
+            script.stdout.on('data',function(data){
+                predict = parseFloat(data.toString()).toFixed(2)
+                Stock.findOne({symbol:'SBIN:NSE'})
+                    .then(data=>{
+                        if(data){
+                            console.log(data)
+                            company=ticker
+                            current=data.price;
+                            res.render('prediction', {
+                                prediction: predict,
+                                stock:company,
+                                current:current,
+                                name: req.user
+                            })
+                        }
+                    })
+                    .catch(error=>{console.log(error)})
+            })
+        }
+        else{
+            predict = "dev"
+            res.render('prediction', {
+                prediction: predict,
+                name: req.user
+            })
+        }
+
     }
 }
 
