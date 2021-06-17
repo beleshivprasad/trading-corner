@@ -34,7 +34,7 @@ def train_1(ticker,folder):
     model.add(Dense(50))
     model.add(Dense(1))
     model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(x_train, y_train, batch_size=30, epochs=100)
+    model.fit(x_train, y_train, batch_size=25, epochs=100)
 
     model.save(f"./MODELS/{folder}/train_1.h5")
     print("LSTM Done")
@@ -75,8 +75,8 @@ def train_2(ticker,folder):
     print(rbf_svr.predict([[len(data) + 1]]))
 
 def training():
-    ticker='HDFC.NS'
-    folder='hdfc'
+    ticker='ICICIBANK.NS'
+    folder='adani'
     train_1(ticker,folder)
     train_2(ticker,folder)
     print("Done Training")

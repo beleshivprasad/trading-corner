@@ -78,7 +78,7 @@ nav{
 margin: 5% auto 5% auto;
 }
 .featurette-item{
-    margin:4% auto 4% auto;
+    margin:6% auto 5% auto;
 }
 
 .nav-link{
@@ -94,8 +94,8 @@ margin: 5% auto 5% auto;
 }
 
 .prediction{
-    height: 50vh;
-    width: 50%;
+    height: 65vh;
+    width: 60%;
     margin:auto auto;
 }
 
@@ -108,7 +108,10 @@ margin: 5% auto 5% auto;
 .market{
     width: 90%;
 }
-
+.pred-table{
+    margin: 0px;
+    padding: 0px;
+}
 @media only screen 
   and (min-device-width: 428px) 
   and (max-device-width: 768px) 

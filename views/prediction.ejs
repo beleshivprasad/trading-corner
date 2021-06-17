@@ -66,89 +66,112 @@
 
   <h1 class="text-center sm">Stock Market Prediction</h1>
   <div class="container-fluid prediction card ">
-    <% if(error_msg != ''){%> 
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong><%= error_msg %></strong>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-  <% } %>
+    <% if(error_msg != ''){%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong><%= error_msg %></strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <% } %>
     <form method="POST" action="/prediction">
       <div class="form-group ">
         <label for="inputState">Stock Name</label>
         <select id="inputState" class="form-control" name="stock">
           <option selected value="none">Choose</option>
-          <option value="ICICIBANK.NS">	ICICI Bank Ltd</option>
-          <option value="RELIANCE.NS">	Reliance Industries Limited</option>
+          <option value="ICICIBANK.NS"> ICICI Bank Ltd</option>
+          <option value="RELIANCE.NS"> Reliance Industries Limited</option>
           <option value="HDFC.NS">Housing Development Finance Corp Ltd</option>
           <option value="HINDUNILVR.NS">Hindustan Unilever Ltd</option>
-          <option value="TCS.NS">	Tata Consultancy Services Limited</option>
-          <option value="INFY.NS">	Infosys Ltd</option>
-          <option value="SBIN.NS">	State Bank of India</option>
+          <option value="TCS.NS"> Tata Consultancy Services Limited</option>
+          <option value="INFY.NS"> Infosys Ltd</option>
+          <option value="SBIN.NS"> State Bank of India</option>
+          <option value="ITC.NS"> ITC Limited </option>
+          <option value="ADANITRANS.NS"> Adani Transmission </option>
+          <option value="KOTAKBANK.NS"> Kotak Mahindra Bank Ltd Fully Paid Ord. Shrs </option>
+          <option value="HCLTECH.NS"> HCL Technologies Ltd</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-dark btn-block" onclick="document.getElementById('predict').value=''">Predict</button>
+      <button type="submit" class="btn btn-dark btn-block"
+        onclick="document.getElementById('predict').value=''">Predict</button>
     </form>
     <div class="container">
       <%if(prediction=="default"){%>
-        <h2 style="color: green; text-align: center;" class="result"></h2>
+      <h2 style="color: green; text-align: center;" class="result"></h2>
       <%}else if(prediction=='dev'){%>
-        <h2 style="color: red; text-align: center;" class="result" id='predict'>Under Development!</h2>
-        <% }else if(prediction!='default' || prediction!='dev'){ %>
-          <div class="table-responsive" style="margin-top: 7%;">
-            <table class="table table-hover">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Stock Name</th>
-                  <th scope="col">Current Price</th>
-                  <th scope="col">Predicted Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%=stock%></td>
-                  <td><%=current%></td>
-                  <td>₹<%=prediction%></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        <% } %> 
-    </div>
-  </div>
-
-  <div class="null" id="contact"></div>
-  <footer class="footer ftr">
-    <div class="container">
-      <span class="">
-        <div class="container-fluid text-center contact-container">
-          <h2 class="contact-title">Contact Us</h2>
-          <div class="row contact contact-item">
-            <div class="col-lg-4 col-md-12">
-              <i class="fas fa-map-marker-alt fa-2x"></i>
-              <p>Sangli,Maharashtra</p>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-              <i class="fas fa-phone fa-2x"></i>
-              <p>+91 9284245945</p>
-            </div>
-
-            <div class="col-lg-4 col-sm-12">
-              <i class="fas fa-envelope fa-2x"></i>
-              <p>project4dtu@gmail.com</p>
-            </div>
-          </div>
+      <h2 style="color: red; text-align: center;" class="result" id='predict'>Under Development!</h2>
+      <% }else if(prediction!='default' || prediction!='dev'){ %>
+      <div class="table-responsive pred-table" style="margin-top: 7%; width: 100%;">
+        <table class="table table-hover " style="width: 100%;">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Stock Name</th>
+              <th scope="col">Current Price</th>
+              <th scope="col">Predicted Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%=stock%></td>
+              <td><%=current%></td>
+              <td>₹<%=prediction%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <h2 class="text-center">Stock Sentiment</h2>
+      <%if(range.length==3){%>
+        Possible Stock Price Rise<br>
+        <div class="progress " style="height: 25px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width:<%=range[0]%>%;font-size:18px;" id='pos' aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=range[0]%>%</div>
         </div>
-        <hr />
-        <div class="container-fluid">
-          <p class="float-right"><a href="#">Back to top</a></p>
-          <p>&copy;2021 TradingCorner.com</p>
+        <!-- <br>
+        Current Movement<br>
+        <div class="progress" style="height: 25px;"> 
+          <div class="progress-bar bg-info" role="progressbar" style="width:<%=range[2]%>%;font-size:18px;" id='pos' aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=range[2]%>%</div>
+        </div> -->
+        <br>
+        Possible Stock Price Fall<br>
+        <div class="progress" style="height: 25px;">
+          <div class="progress-bar bg-danger" role="progressbar" style="width:<%=range[1]%>%;font-size:18px;" id='pos' aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=range[1]%>%</div>
         </div>
-      </span>
+        <%}%>
+        <% } %>
+      </div>
     </div>
-  </footer>
+
+    <div class="null" id="contact"></div>
+    <footer class="footer ftr">
+      <div class="container">
+        <span class="">
+          <div class="container-fluid text-center contact-container">
+            <h2 class="contact-title">Contact Us</h2>
+            <div class="row contact contact-item">
+              <div class="col-lg-4 col-md-12">
+                <i class="fas fa-map-marker-alt fa-2x"></i>
+                <p>Sangli,Maharashtra</p>
+              </div>
+
+              <div class="col-lg-4 col-md-12">
+                <i class="fas fa-phone fa-2x"></i>
+                <p>+91 9284245945</p>
+              </div>
+
+              <div class="col-lg-4 col-sm-12">
+                <i class="fas fa-envelope fa-2x"></i>
+                <p>project4dtu@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="container-fluid">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>&copy;2021 TradingCorner.com</p>
+          </div>
+        </span>
+      </div>
+    </footer>
 </body>
 <!-- Optional JavaScript; choose one of the two! -->
 

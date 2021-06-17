@@ -1,11 +1,14 @@
-const {spawn} = require('child_process')
-const script=spawn('python3',['./python/test.py',1,2])
+const spawn = require("child_process").spawn;
+const getsent = spawn("python3", ["sentiment.py", "SBIN:NSE"]);
+getsent.stdout.on("data", function (data) {
+  console.log(data.toString());
+});
+// const {spawn} = require('child_process')
+// const script=spawn('python3',['./python/test.py',1,2])
 
-script.stdout.on('data',function(data){
-    console.log(data.toString())
-})
-
-
+// script.stdout.on('data',function(data){
+//     console.log(data.toString())
+// })
 
 // const request = require('request')
 // const cheerio = require('cheerio')
@@ -17,7 +20,7 @@ script.stdout.on('data',function(data){
 //         "accept-language": "en-US"
 //     },
 //     json:true
-//   }, 
+//   },
 //   function (error, response, body) {
 //     if(error){
 //         // console.log(err)
@@ -28,12 +31,10 @@ script.stdout.on('data',function(data){
 //     if(body){
 //         var $ = cheerio.load(body)
 //         let stock = $('div.fxKbKc').text()
-//         console.log(stock)       
-      
+//         console.log(stock)
+
 //     }
 // });
-
-
 
 //     // unirest.get(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data`)
 //     //     .query({
@@ -60,7 +61,6 @@ script.stdout.on('data',function(data){
 //         "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
 //         "useQueryString": true
 //     });
-
 
 //     req.end(function (result) {
 //         console.log(result.status, result.headers, result.body);
